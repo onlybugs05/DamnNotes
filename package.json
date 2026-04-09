@@ -1,7 +1,14 @@
 {
-  "name": "damnnotes",
+  "name": "@onlybugs05/damnnotes",
   "version": "1.0.0",
   "description": "Secure, fast, local-first Bug Bounty Notes App with integrated Web Terminal and Markdown support.",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onlybugs05/DamnNotes.git"
+  },
   "bin": {
     "damnnotes": "bin/damnnotes.js"
   },
