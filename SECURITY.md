@@ -21,7 +21,7 @@ The integrated Web Terminal runs as a child process of the DamnNotes server. It 
 If you are a security researcher and have discovered a vulnerability in DamnNotes, we encourage you to report it to us privately.
 
 Please contact **onlybugs05** directly at: 
-`onlybugs05@example.com` (Replace with your professional contact)
+`onlybugs05@gmail.com`   For Now We are using gmail We will Upgrade soon
 
 We will investigate all legitimate reports and provide a fix as quickly as possible. As this is a commercial product, we may offer rewards or recognition for critical security findings reported responsibly.
 
