@@ -6,6 +6,7 @@
 const express = require('express');
 const expressWs = require('express-ws');
 const cors = require('cors');
+const rateLimit = require('express-rate-limit');
 const fs = require('fs');
 const path = require('path');
 // Node-pty is removed
@@ -16,6 +17,14 @@ expressWs(app); // Extend express app with express-ws
 
 app.use(cors());
 app.use(express.json());
+
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per window
+    standardHeaders: true,
+    legacyHeaders: false
+});
+app.use(limiter);
 
 const workingDir = process.cwd();
 
