@@ -1,7 +1,7 @@
 {
   "name": "damnnotes",
   "version": "1.0.0",
-  "description": "",
+  "description": "Secure, fast, local-first Bug Bounty Notes App with integrated Web Terminal and Markdown support.",
   "bin": {
     "damnnotes": "bin/damnnotes.js"
   },
@@ -10,9 +10,9 @@
     "build": "npm install --prefix client && npm run build --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["bug-bounty", "note-taking", "penetration-testing", "web-terminal", "recon"],
+  "author": "onlybugs05",
+  "license": "MIT",
   "type": "commonjs",
   "dependencies": {
     "body-parser": "^2.2.2",
