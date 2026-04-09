@@ -6,6 +6,8 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { 
   Folder, File, ChevronRight, ChevronDown, 
   Plus, FolderPlus, Save, Edit3, BookOpen, Layout, TerminalSquare, Lock, X, Search, Trash2
@@ -400,7 +402,29 @@ function App() {
               {(viewMode === 'read' || viewMode === 'split') && (
                 <div className="preview-wrapper">
                   <div className="markdown-preview markdown-body">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{fileContent || '*No content available...*'}</ReactMarkdown>
+                    <ReactMarkdown 
+                      remarkPlugins={[remarkGfm]}
+                      components={{
+                        code({node, inline, className, children, ...props}) {
+                          const match = /language-(\w+)/.exec(className || '');
+                          return !inline && match ? (
+                            <SyntaxHighlighter
+                              children={String(children).replace(/\n$/, '')}
+                              style={oneDark}
+                              language={match[1]}
+                              PreTag="div"
+                              {...props}
+                            />
+                          ) : (
+                            <code className={className} {...props}>
+                              {children}
+                            </code>
+                          );
+                        }
+                      }}
+                    >
+                      {fileContent || '*No content available...*'}
+                    </ReactMarkdown>
                   </div>
                 </div>
               )}
