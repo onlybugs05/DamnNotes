@@ -1,15 +1,7 @@
 {
-  "name": "@onlybugs05/damnnotes",
+  "name": "damnnotes",
   "version": "1.0.0",
-  "description": "Secure, fast, local-first Bug Bounty Notes App with integrated Web Terminal and Markdown support.",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/onlybugs05/DamnNotes.git"
-  },
+  "description": "Enterprise-Grade Intelligence Workspace for Professional Security Researchers and Red Teams.",
   "bin": {
     "damnnotes": "bin/damnnotes.js"
   },
@@ -20,7 +12,7 @@
   },
   "keywords": ["bug-bounty", "note-taking", "penetration-testing", "web-terminal", "recon"],
   "author": "onlybugs05",
-  "license": "MIT",
+  "license": "Proprietary",
   "type": "commonjs",
   "dependencies": {
     "body-parser": "^2.2.2",

@@ -1,3 +1,8 @@
+/**
+ * DamnNotes - Enterprise Intelligence Workspace
+ * Copyright (c) 2026 onlybugs05. All rights reserved.
+ * PROPRIETARY AND CONFIDENTIAL. UNAUTHORIZED SHARING IS PROHIBITED.
+ */
 const express = require('express');
 const expressWs = require('express-ws');
 const cors = require('cors');

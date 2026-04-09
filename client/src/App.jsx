@@ -1,3 +1,8 @@
+/**
+ * DamnNotes - Enterprise Intelligence Workspace (Frontend)
+ * Copyright (c) 2026 onlybugs05. All rights reserved.
+ * PROPRIETARY AND CONFIDENTIAL.
+ */
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
