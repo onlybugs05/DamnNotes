@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+:root {
+  --bg-main: #0d1117;
+  --bg-sidebar: #010409;
+  --bg-hover: rgba(177, 186, 196, 0.12);
+  --text-primary: #e6edf3;
+  --text-secondary: #848d97;
+  --accent: #2f81f7;
+  --border: #30363d;
+  --folder-color: #7d8590;
+  --scrollbar-bg: transparent;
+  --scrollbar-thumb: rgba(110, 118, 129, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  line-height: 1.6;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 5px;
+  border: 2px solid var(--bg-main);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+.markdown-body {
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px;
+}
+.markdown-body h1, .markdown-body h2, .markdown-body h3 {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.3em;
+  margin-top: 1.5em;
+  margin-bottom: 16px;
+  color: #fff;
+  font-weight: 600;
+}
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+.markdown-body pre {
+  background-color: #161b22;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px;
+  overflow: auto;
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+}
+.markdown-body code {
+  background-color: rgba(110,118,129,0.4);
+  padding: 0.2em 0.4em;
+  border-radius: 6px;
+  font-family: 'Fira Code', monospace;
+  font-size: 85%;
+}
+.markdown-body pre code {
+  background-color: transparent;
+  padding: 0;
+}
+.markdown-body blockquote {
+  border-left: 4px solid var(--border);
+  color: var(--text-secondary);
+  padding-left: 1rem;
+  margin-left: 0;
+}
+.markdown-body ul, .markdown-body ol {
+  padding-left: 2em;
+  margin-bottom: 16px;
+}
+.markdown-body p {
+  margin-bottom: 16px;
+}
+.markdown-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 16px;
+}
+.markdown-body th, .markdown-body td {
+  border: 1px solid var(--border);
+  padding: 6px 13px;
+}
+.markdown-body hr {
+  height: 0.25em;
+  padding: 0;
+  margin: 24px 0;
+  background-color: var(--border);
+  border: 0;
+}

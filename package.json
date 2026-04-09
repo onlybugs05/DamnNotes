@@ -1,0 +1,26 @@
+{
+  "name": "damnnotes",
+  "version": "1.0.0",
+  "description": "",
+  "bin": {
+    "damnnotes": "bin/damnnotes.js"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix client && npm run build --prefix client",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "chokidar": "^5.0.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "express-ws": "^5.0.2",
+    "open": "^11.0.0",
+    "ws": "^8.20.0"
+  }
+}
