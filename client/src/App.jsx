@@ -319,6 +319,7 @@ function App() {
 
         <div className="workspace-title" onClick={() => setSelectedFolder('')}>
            <Folder size={14} style={{ marginRight: 6 }} /> WORKSPACE
+           <span className="file-count">{files.reduce((acc, curr) => acc + (curr.children ? curr.children.length : 1), 0)} Nodes</span>
            {selectedFolder === '' && <span className="active-dot"></span>}
         </div>
 
@@ -334,9 +335,12 @@ function App() {
         </div>
         
         <div className="sidebar-footer">
+           <div className="system-stats">
+              <div className="stat"><div className="stat-dot pulse"></div> Local Encryption Active</div>
+           </div>
            <button className={`terminal-btn ${viewMode === 'terminal' ? 'active' : ''}`} onClick={() => setViewMode('terminal')}>
              <TerminalSquare size={16} style={{marginRight: 8}} />
-             Terminal <span className="shortcut-hint">Alt+T</span>
+             Web Terminal <span className="shortcut-hint">Alt+T</span>
            </button>
         </div>
       </div>
@@ -347,7 +351,11 @@ function App() {
           <div className="terminal-wrapper">
             <div className="editor-header terminal-header">
               <div className="file-name">
-                <TerminalSquare size={16} style={{color: 'var(--accent)'}} /> Web Terminal
+                <div className="header-status-dot pulse"></div>
+                <TerminalSquare size={16} style={{color: 'var(--accent)'}} /> ⚡ LIVE_TERMINAL_SESSION
+              </div>
+              <div className="header-actions">
+                 <span className="terminal-info">SH: BASH_INST | ENC: LOCALHOST_ONLY</span>
               </div>
             </div>
             <WebTerminal />
@@ -355,7 +363,7 @@ function App() {
         ) : selectedFile ? (
           <>
             <div className="editor-header">
-              <div className="file-name"><File size={16} color="var(--text-secondary)" /> {selectedFile}</div>
+              <div className="file-name"><div className="header-status-dot"></div> <File size={16} color="var(--text-secondary)" /> {selectedFile}</div>
               <div className="header-actions">
                 <div className="view-toggles">
                   <button className={`icon-btn toggle-btn ${viewMode === 'read' ? 'active' : ''}`} onClick={() => setViewMode('read')} title="Read Mode">
@@ -370,7 +378,7 @@ function App() {
                 </div>
                 <div className="divider"></div>
                 <button className={`btn btn-save ${isSaving ? 'saved' : ''}`} onClick={saveFile}>
-                  <Save size={16} style={{marginRight: 6}} /> {isSaving ? 'Saved!' : 'Save'} <span className="hint">Ctrl+S</span>
+                  <Save size={16} style={{marginRight: 6}} /> {isSaving ? 'Payload Saved!' : 'Save Note'} <span className="hint">Ctrl+S</span>
                 </button>
               </div>
             </div>
@@ -380,14 +388,14 @@ function App() {
                 <div className="editor-wrapper">
                   <textarea
                     className="editor-textarea" value={fileContent} onChange={e => setFileContent(e.target.value)}
-                    spellCheck="false" placeholder="Write your beautiful notes here..."
+                    spellCheck="false" placeholder="Draft your report or notes..."
                   />
                 </div>
               )}
               {(viewMode === 'read' || viewMode === 'split') && (
                 <div className="preview-wrapper">
                   <div className="markdown-preview markdown-body">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{fileContent || '*Nothing written yet...*'}</ReactMarkdown>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{fileContent || '*No content available...*'}</ReactMarkdown>
                   </div>
                 </div>
               )}
@@ -395,28 +403,47 @@ function App() {
           </>
         ) : (
           <div className="empty-state">
-            <div className="empty-state-card">
-              <div className="empty-icon-wrapper">
-                 <img src="https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/terminal.svg" className="hero-icon" style={{filter:'invert(1)', opacity:0.1, width:80}} alt="" />
-              </div>
-              <h2>Ready for Recon</h2>
-              <p>Select a file from the sidebar, open the terminal, or create a new note.</p>
-              
-              <div className="shortcut-cards">
-                <div className="shortcut-card">
-                  <div className="keys"><kbd>Alt</kbd> + <kbd>T</kbd></div>
-                  <span>Web Terminal</span>
-                </div>
-                <div className="shortcut-card">
-                  <div className="keys"><kbd>Alt</kbd> + <kbd>N</kbd></div>
-                  <span>New File</span>
-                </div>
-                <div className="shortcut-card">
-                   <div className="keys"><kbd>Ctrl</kbd> + <kbd>S</kbd></div>
-                   <span>Save Note</span>
-                </div>
-              </div>
+            <div className="dossier-card glass-panel">
+               <div className="dossier-header">
+                  <div className="dossier-badge">CONFIDENTIAL</div>
+                  <div className="dossier-id">MISSION_ID: [{Math.random().toString(36).substring(2, 9).toUpperCase()}]</div>
+               </div>
+               <div className="dossier-body">
+                  <h2 className="glow-text">DamnNotes Intelligence Dashboard</h2>
+                  <p className="dossier-subtext">Secure Localhost Environment | No Network Broadcast</p>
+                  
+                  <div className="dossier-stats">
+                     <div className="dossier-stat">
+                        <span className="label">Status</span>
+                        <span className="value text-green">READY_FOR_RECON</span>
+                     </div>
+                     <div className="dossier-stat">
+                        <span className="label">Uptime</span>
+                        <span className="value">SYSTEM_ONLINE</span>
+                     </div>
+                  </div>
+
+                  <div className="shortcut-grid">
+                    <div className="shortcut-item">
+                      <kbd>Alt</kbd> + <kbd>T</kbd>
+                      <span className="action-name">Toggle Terminal</span>
+                    </div>
+                    <div className="shortcut-item">
+                      <kbd>Alt</kbd> + <kbd>N</kbd>
+                      <span className="action-name">New Finding</span>
+                    </div>
+                    <div className="shortcut-item">
+                       <kbd>Alt</kbd> + <kbd>S</kbd>
+                       <span className="action-name">Fuzzy Data Search</span>
+                    </div>
+                  </div>
+
+                  <div className="dossier-footer">
+                     Ready to document vulnerabilities or run scanning tools.
+                  </div>
+               </div>
             </div>
+            <div className="bg-glitch"></div>
           </div>
         )}
       </div>
