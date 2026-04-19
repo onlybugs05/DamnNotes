@@ -27,18 +27,30 @@ const limiter = rateLimit({
 app.use(limiter);
 
 const workingDir = process.cwd();
+const safeRoot = fs.realpathSync(workingDir);
 
 // Secure by relying strictly on 127.0.0.1 binding
 
 // Safe path resolver to prevent directory traversal
 const getSecurePath = (filePath) => {
     if (!filePath) throw new Error('File path required');
-    const fullPath = path.posix.normalize(path.resolve(workingDir, filePath));
-    // Must strictly start with workingDir + separator or exactly match workingDir
-    if (!fullPath.startsWith(workingDir + path.sep) && fullPath !== workingDir) {
+
+    const resolvedPath = path.resolve(safeRoot, filePath);
+    let canonicalPath;
+
+    if (fs.existsSync(resolvedPath)) {
+        canonicalPath = fs.realpathSync.native(resolvedPath);
+    } else {
+        const parentDir = path.dirname(resolvedPath);
+        const canonicalParent = fs.realpathSync.native(parentDir);
+        canonicalPath = path.join(canonicalParent, path.basename(resolvedPath));
+    }
+
+    // Must strictly stay within safeRoot
+    if (!canonicalPath.startsWith(safeRoot + path.sep) && canonicalPath !== safeRoot) {
         throw new Error('Forbidden traversal');
     }
-    return fullPath;
+    return canonicalPath;
 };
 
 // WebSocket connection for terminal
@@ -176,11 +188,16 @@ app.delete('/api/file', (req, res) => {
         const fullPath = getSecurePath(filePath);
         
         if (!fs.existsSync(fullPath)) return res.status(404).json({ error: 'Not found' });
+
+        const canonicalPath = fs.realpathSync.native(fullPath);
+        if (!canonicalPath.startsWith(safeRoot + path.sep) && canonicalPath !== safeRoot) {
+            throw new Error('Forbidden traversal');
+        }
         
-        if (fs.statSync(fullPath).isDirectory()) {
-            fs.rmSync(fullPath, { recursive: true, force: true });
+        if (fs.statSync(canonicalPath).isDirectory()) {
+            fs.rmSync(canonicalPath, { recursive: true, force: true });
         } else {
-            fs.unlinkSync(fullPath);
+            fs.unlinkSync(canonicalPath);
         }
         res.json({ success: true });
     } catch (err) {
